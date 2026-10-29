@@ -1,5 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/predict";
-
+const API_URL = 'https://customer-support-ticket-intelligence.onrender.com/predict';
 const form = document.querySelector("#ticket-form");
 const messageInput = document.querySelector("#ticket-message");
 const characterCount = document.querySelector("#character-count");

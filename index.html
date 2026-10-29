@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Analyze customer support messages with the SupportIQ ticket intelligence demo."
+    >
+    <meta name="theme-color" content="#f5f7fb">
+    <title>SupportIQ — Ticket Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="SupportIQ home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 5.75A2.75 2.75 0 0 1 7.75 3h8.5A2.75 2.75 0 0 1 19 5.75v7.5A2.75 2.75 0 0 1 16.25 16H11l-4.5 4v-4.15A2.75 2.75 0 0 1 5 13.25v-7.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              <path d="M9 8h6M9 11.5h3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="brand-copy">
+            <span class="brand-name">SupportIQ</span>
+            <span class="brand-subtitle">AI-Powered Customer Support Ticket Intelligence</span>
+          </span>
+        </a>
+        <div class="header-status" aria-label="API endpoint">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Local API</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow"><span class="eyebrow-line"></span> TICKET INTELLIGENCE</p>
+          <h1 id="page-title">Understand every <span>customer</span>.</h1>
+          <p class="intro-copy">
+            Turn a support message into a clear intent in seconds. Enter a ticket below to see your model in action.
+          </p>
+        </section>
+
+        <section class="workspace" aria-label="Ticket analysis workspace">
+          <article class="card input-card">
+            <div class="card-heading">
+              <div class="heading-icon input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7 4.75h7.5L19 9.25v10A1.75 1.75 0 0 1 17.25 21h-10A1.75 1.75 0 0 1 5.5 19.25v-12A2.5 2.5 0 0 1 8 4.75Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M14 5v4.5h4.5M9 13h6M9 16.5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <h2>Analyze a ticket</h2>
+                <p>Paste a customer message to identify its intent.</p>
+              </div>
+            </div>
+
+            <form id="ticket-form" novalidate>
+              <label class="field-label" for="ticket-message">Customer message</label>
+              <div class="textarea-wrap">
+                <textarea
+                  id="ticket-message"
+                  name="message"
+                  rows="7"
+                  placeholder="Describe the customer's issue here..."
+                  aria-describedby="character-count keyboard-hint"
+                  required
+                ></textarea>
+                <div class="textarea-meta">
+                  <span id="keyboard-hint">Be as specific as you can</span>
+                  <span id="character-count" aria-live="polite">0 characters</span>
+                </div>
+              </div>
+
+              <div class="examples">
+                <p class="examples-label">TRY AN EXAMPLE</p>
+                <div class="example-list">
+                  <button class="example-chip" type="button" data-example="I want to track my order because it has not arrived.">
+                    <span class="chip-icon" aria-hidden="true">↗</span> Track an order
+                  </button>
+                  <button class="example-chip" type="button" data-example="I forgot my password and cannot log into my account.">
+                    <span class="chip-icon" aria-hidden="true">↗</span> Account access
+                  </button>
+                  <button class="example-chip" type="button" data-example="I would like to request a refund for my recent purchase.">
+                    <span class="chip-icon" aria-hidden="true">↗</span> Request a refund
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="button button-primary" id="analyze-button" type="submit">
+                  <span class="button-label">Analyze Ticket</span>
+                  <svg class="button-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4.5 10h11m0 0-4.25-4.25M15.5 10l-4.25 4.25" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <button class="button button-clear" id="clear-button" type="button">Clear</button>
+                <span class="submit-hint">or press <kbd>Ctrl</kbd> + <kbd>Enter</kbd></span>
+              </div>
+              <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+            </form>
+          </article>
+
+          <aside class="card result-card" aria-labelledby="result-title">
+            <div class="result-topline">
+              <div class="card-heading">
+                <div class="heading-icon result-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3.75 14.2 9.8l6.05 2.2-6.05 2.2L12 20.25l-2.2-6.05-6.05-2.2 6.05-2.2L12 3.75Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="m18.5 3 .65 1.85L21 5.5l-1.85.65L18.5 8l-.65-1.85L16 5.5l1.85-.65L18.5 3Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 id="result-title">Analysis result</h2>
+                  <p>Your model's prediction will appear here.</p>
+                </div>
+              </div>
+              <span class="result-badge" id="result-badge">READY</span>
+            </div>
+
+            <div class="result-content" id="result-content" aria-live="polite" aria-atomic="true">
+              <div class="empty-result" id="empty-result">
+                <div class="empty-art" aria-hidden="true">
+                  <span class="art-orbit orbit-one"></span>
+                  <span class="art-orbit orbit-two"></span>
+                  <span class="art-center">
+                    <svg viewBox="0 0 32 32" fill="none">
+                      <path d="m16 4 3.25 8.75L28 16l-8.75 3.25L16 28l-3.25-8.75L4 16l8.75-3.25L16 4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </div>
+                <h3>Ready when you are</h3>
+                <p>Submit a customer message and your predicted intent will show up here.</p>
+              </div>
+
+              <div class="loading-result" id="loading-result" hidden>
+                <span class="spinner" aria-hidden="true"></span>
+                <p>Analyzing customer message<span class="loading-dots">...</span></p>
+                <span class="loading-caption">Connecting to your local model</span>
+              </div>
+
+              <div class="prediction-result" id="prediction-result" hidden>
+                <p class="result-overline">PREDICTED INTENT</p>
+                <h3 id="predicted-intent">—</h3>
+                <p class="intent-identifier" id="intent-identifier"></p>
+                <div class="result-divider"></div>
+                <p class="message-label">CUSTOMER MESSAGE</p>
+                <blockquote id="returned-message"></blockquote>
+              </div>
+
+              <div class="error-result" id="error-result" hidden>
+                <span class="error-icon" aria-hidden="true">!</span>
+                <h3>We couldn't analyze that ticket</h3>
+                <p id="error-message"></p>
+              </div>
+            </div>
+
+            <div class="result-footnote">
+              <span class="sparkle" aria-hidden="true">✦</span>
+              Powered by your character-level TF-IDF + LinearSVC model
+            </div>
+          </aside>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>SupportIQ <span class="footer-divider">·</span> A machine-learning portfolio project</span>
+        <span class="footer-note">Built for better support experiences</span>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -4,13 +4,21 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import os
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(
     title="Customer Support Ticket Intelligence API",
     description="Predicts the intent of a customer support message.",
     version="1.0.0"
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://customer-support-ticket-intelligence-1.onrender.com"
+    ],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://127.0.0.1:5500"],
